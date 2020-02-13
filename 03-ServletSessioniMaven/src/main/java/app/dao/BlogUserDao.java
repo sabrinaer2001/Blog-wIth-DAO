@@ -70,9 +70,9 @@ public class BlogUserDao
         return !userList.isEmpty();
 
     }
-    
-    public boolean findUserByName( String name)
-    {   
+
+    public boolean findUserByName( String name )
+    {
         TypedQuery<BlogUser> typedQuery = em.createQuery("SELECT B FROM BlogUser B WHERE B.name LIKE :name", BlogUser.class);
         List<BlogUser> userList = typedQuery.setParameter("name", name).setMaxResults(10).getResultList();
         return !userList.isEmpty();

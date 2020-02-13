@@ -15,9 +15,10 @@ import javax.persistence.Persistence;
  */
 public class Dao
 {
+
     String PERSISTENCE_UNIT_NAME = "persistence";
     private final EntityManager em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME)
-                .createEntityManager();
+            .createEntityManager();
     static PostDao postDao = new PostDao();
     static BlogUserDao userDao = new BlogUserDao();
     static CommentDao commentDAO = new CommentDao();

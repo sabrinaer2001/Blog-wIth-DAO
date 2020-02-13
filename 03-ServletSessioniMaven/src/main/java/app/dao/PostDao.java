@@ -18,6 +18,7 @@ import javax.persistence.TypedQuery;
  */
 public class PostDao
 {
+
     private final EntityManager em;
     String PERSISTENCE_UNIT_NAME = "persistence";
 
@@ -26,33 +27,39 @@ public class PostDao
         this.em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME)
                 .createEntityManager();
     }
-    public List<Post> findAll() {
+
+    public List<Post> findAll()
+    {
         /* 
         https://docs.oracle.com/javaee/6/tutorial/doc/bnbrg.html       
-        */
+         */
         TypedQuery<Post> typedQuery = em.createQuery("SELECT P FROM Post P", Post.class);
         List<Post> personaList = typedQuery.setMaxResults(10).getResultList();
         return personaList;
     }
-    public boolean insertPost(Post p) {
+
+    public boolean insertPost( Post p )
+    {
         em.getTransaction().begin();
-        try {
-            em.persist(p); 
+        try
+        {
+            em.persist(p);
             // -- workaround cache entity manager
             em.flush();
-            em.clear();   
+            em.clear();
             // --
             em.getTransaction().commit();
-            
+
             return true;
-        } catch (Exception e) {
+        }
+        catch( Exception e )
+        {
             e.printStackTrace();
-            if (em.getTransaction().isActive()) {
+            if( em.getTransaction().isActive() )
+            {
                 em.getTransaction().rollback();
             }
             return false;
         }
     }
 }
-
-

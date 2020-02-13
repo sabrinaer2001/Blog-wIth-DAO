@@ -36,7 +36,7 @@ public class SigninServlet extends HttpServlet
     protected void doGet( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
-    
+
     }
 
     /**
@@ -50,20 +50,20 @@ public class SigninServlet extends HttpServlet
     @Override
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
-    {   
-        try (PrintWriter out = response.getWriter())
+    {
+        try( PrintWriter out = response.getWriter() )
         {
             response.setContentType("text/html");
             String name = request.getParameter("name");
             String password = request.getParameter("password");
-            if( Dao.getUserDao().findUserByName(name))
+            if( Dao.getUserDao().findUserByName(name) )
             {
-                    request.getRequestDispatcher("signIn.html").include(request, response);
-                    out.print("<h2>This user already exists!</h2>");
+                request.getRequestDispatcher("signIn.html").include(request, response);
+                out.print("<h2>This user already exists!</h2>");
             }
             else
-            {   
-                
+            {
+
                 BlogUser u = new BlogUser(name, Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString());
                 Dao.getUserDao().insertUser(u);
                 out.print("<h2>Correctly signed in!</h2>");

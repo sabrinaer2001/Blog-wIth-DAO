@@ -18,6 +18,7 @@ import javax.persistence.TypedQuery;
  */
 public class CommentDao
 {
+
     private final EntityManager em;
     String PERSISTENCE_UNIT_NAME = "persistence";
 
@@ -36,8 +37,8 @@ public class CommentDao
         List<Comment> commentList = typedQuery.setMaxResults(10).getResultList();
         return commentList;
     }
-    
-    public List<Comment> findCommentsByPostId(Long postId)
+
+    public List<Comment> findCommentsByPostId( Long postId )
     {
         /* 
         https://docs.oracle.com/javaee/6/tutorial/doc/bnbrg.html       

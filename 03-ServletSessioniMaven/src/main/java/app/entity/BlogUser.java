@@ -9,8 +9,6 @@ import javax.persistence.Id;
 /**
  * @author Bachir_Karim
  */
-
-
 @Entity
 public class BlogUser
 {

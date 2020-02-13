@@ -9,7 +9,6 @@ import javax.persistence.Id;
 /**
  * @author Bachir_Karim
  */
-
 @Entity
 public class Comment
 {
@@ -20,13 +19,13 @@ public class Comment
 
     @Basic
     private String dataOra;
-    
+
     @Basic
     private String autore;
 
     @Basic
     private String testo;
-    
+
     @Basic
     private Long idPost;
 
@@ -34,7 +33,7 @@ public class Comment
     {
     }
 
-    public Comment( String dataOra, String testo, String autore, Long idPost)
+    public Comment( String dataOra, String testo, String autore, Long idPost )
     {
         this.dataOra = dataOra;
         this.testo = testo;
