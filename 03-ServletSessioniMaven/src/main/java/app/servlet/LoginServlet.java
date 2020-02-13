@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet
                 HttpSession session = request.getSession();
                 session.setAttribute("name", name);
 
-                request.getRequestDispatcher("LoggedBlog.html").include(request, response);
+                request.getRequestDispatcher("AdminBlog.html").include(request, response);
 
                 List<Post> listaPost = Dao.getPostDao().findAll();
                 out.print(UsefullF.getPostAndComments(listaPost));
@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet
                 HttpSession session = request.getSession();
                 session.setAttribute("name", name);
 
-                request.getRequestDispatcher("GuestBlog.html").include(request, response);
+                request.getRequestDispatcher("PublicBlog.html").include(request, response);
 
                 List<Post> listaPost = Dao.getPostDao().findAll();
                 out.print(UsefullF.getPostAndComments(listaPost));

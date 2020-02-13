@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Porceddu's Public Blog </title>
+        <title>Porceddu's Logged Blog</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
@@ -26,9 +26,15 @@
         </style>
     </head>
     <body>
-        <a style="font-family: verdana; font-size: 15px;" href="login.html">Login</a>
         <a style="font-family: verdana; font-size: 15px;" href="LogoutServlet">Logout</a>
-        <hr/>
+        <hr>
+        <h1>Write a post</h1>
+        <form action="NewPostServlet" method="post">
+            Title: <input type="text" name="title"><br>
+            Text:   <input type="text" name="text"><br>
+            <input type="submit" value="post">
+        </form>
+        <hr>
         <h1>Post: </h1>
     </body>
 </html>

@@ -74,7 +74,7 @@ public class NewPostServlet extends HttpServlet
         response.setContentType("text/html");
         try( PrintWriter out = response.getWriter() )
         {
-            request.getRequestDispatcher("LoggedBlog.html").include(request, response);
+            request.getRequestDispatcher("AdminBlog.html").include(request, response);
 
             String title = request.getParameter("title");
             String text = request.getParameter("text");
