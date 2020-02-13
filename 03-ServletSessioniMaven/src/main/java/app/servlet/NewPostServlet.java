@@ -5,8 +5,8 @@
  */
 package app.servlet;
 
+import app.Util.UsefullF;
 import app.dao.Dao;
-import app.entity.Comment;
 import app.entity.Post;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,7 +50,7 @@ public class NewPostServlet extends HttpServlet
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet NewPostServlet</title>");            
+            out.println("<title>Servlet NewPostServlet</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet NewPostServlet at " + request.getContextPath() + "</h1>");
@@ -72,44 +72,24 @@ public class NewPostServlet extends HttpServlet
             throws ServletException, IOException
     {
         response.setContentType("text/html");
-        try (PrintWriter out = response.getWriter())
+        try( PrintWriter out = response.getWriter() )
         {
             request.getRequestDispatcher("LoggedBlog.html").include(request, response);
-            
+
             String title = request.getParameter("title");
             String text = request.getParameter("text");
-            
+
             LocalDateTime myDateObj = LocalDateTime.now();
             DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
             String formattedDate = myDateObj.format(myFormatObj);
-            
-            Post p = new Post(title,(String)request.getSession(false).getAttribute("name"),formattedDate,text);
+
+            Post p = new Post(title, (String) request.getSession(false).getAttribute("name"), formattedDate, text);
             Dao.getPostDao().insertPost(p);
-            
+
             List<Post> listaPost = Dao.getPostDao().findAll();
-            for(Post po : listaPost)
-            {
-                out.print("<div class=\"card\">");
-                out.print("<h2>" + po.getTitolo() + "</h2>");
-                out.print("<h5> Author: " + po.getAutore()+ "</h5>");
-                out.print("<h5> Date & Time: " + po.getDataOra() + "</h5>");
-                out.print("<p>" + po.getTesto() + "</p><hr>");
-                out.print(  "<form action=\"CommentServlet\" method=\"post\">\n" +
-                            "            Comment: <input type=\"text\" name=\"comment\"> \n" +
-                            "            <input type=\"hidden\" name=\"hiddenPostId\" value=\""+ po.getId() +"\">\n" +             
-                            "            <input type=\"submit\" value=\"send\">\n" +
-                            "</form>");
-                List<Comment> listaCommenti = Dao.getCommentDAO().findCommentsByPostId(po.getId());
-                for(Comment c : listaCommenti)
-                {
-                    out.print("<h5>" + c.getAutore() + ": " + c.getTesto() + " " + c.getDataOra() + "</h5>");
-                }
-                out.print("</div>");
-            }
-            
+            out.print(UsefullF.getPostAndComments(listaPost));
+
         }
     }
-
-    
 
 }
