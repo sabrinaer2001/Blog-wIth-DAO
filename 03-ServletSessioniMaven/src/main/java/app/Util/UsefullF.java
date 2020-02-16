@@ -32,12 +32,18 @@ public class UsefullF
                     + "            Comment: <input type=\"text\" name=\"comment\"> \n"
                     + "            <input type=\"hidden\" name=\"hiddenPostId\" value=\"" + po.getId() + "\">\n"
                     + "            <input type=\"submit\" value=\"send\">\n"
-                    + "</form>";
+                    + "</form>"
+                    + "<button class=\"collapsible\">View comments</button>\n"
+                    + "        <div class=\"content\">\n"
+                    + "            <ul>\n";
             List<Comment> listaCommenti = Dao.getCommentDAO().findCommentsByPostId(po.getId());
             for( Comment c : listaCommenti )
             {
-                out += "<h5>" + c.getAutore() + ": " + c.getTesto() + " " + c.getDataOra() + "</h5>";
+                out += "<dt>" + c.getDataOra() + " " + c.getAutore() + "</dt>";
+                out += "<dd>-" + c.getTesto() + "</dd>";
             }
+            out +=    "        </ul>\n"
+                    + "        </div>\n";
             out += "</div>";
         }
         return out;
