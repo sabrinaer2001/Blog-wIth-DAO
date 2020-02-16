@@ -28,23 +28,28 @@ public class UsefullF
             out += "<h5> Author: " + po.getAutore() + "</h5>";
             out += "<h5> Date & Time: " + po.getDataOra() + "</h5>";
             out += "<p>" + po.getTesto() + "</p><hr>";
-            out += "<form action=\"CommentServlet\" method=\"post\">\n"
-                    + "            Comment: <input type=\"text\" name=\"comment\"> \n"
-                    + "            <input type=\"hidden\" name=\"hiddenPostId\" value=\"" + po.getId() + "\">\n"
-                    + "            <input type=\"submit\" value=\"send\">\n"
+            out += "<form action=\"CommentServlet\" method=\"post\">"
+                    + "Comment: <input type=\"text\" name=\"comment\">"
+                    + "<input type=\"hidden\" name=\"hiddenPostId\" value=\"" + po.getId() + "\">"
+                    + "<input type=\"submit\" value=\"send\">"
                     + "</form>"
-                    + "<button class=\"collapsible\">View comments</button>\n"
-                    + "        <div class=\"content\">\n"
-                    + "            <ul>\n";
+                    + "<button class=\"collapsible\">View comments</button>"
+                    + "<div class=\"content\">"
+                    + "<dl>";
             List<Comment> listaCommenti = Dao.getCommentDAO().findCommentsByPostId(po.getId());
             for( Comment c : listaCommenti )
             {
-                out += "<dt>" + c.getDataOra() + " " + c.getAutore() + "</dt>";
-                out += "<dd>-" + c.getTesto() + "</dd>";
+                out +=    "<div class=\"comment\">"
+                        + "<dt>" + c.getAutore() + ":</dt>";
+                out +=    "<dd>" + c.getTesto() + "</dd>"
+                        + "<h6>" + c.getDataOra() + "</h6>"
+                        + "</div>";
+                //out += "<p>" + "<span style=\"text-align: right;\">" + c.getDataOra() + "</span>" + " " + c.getAutore() + ":\n" + c.getTesto() + "</p>";
             }
-            out +=    "        </ul>\n"
-                    + "        </div>\n";
-            out += "</div>";
+            out +=    "</dl>"
+                    + "</div>"
+                    + "</div>"
+                    + "<script src=\"ViewComments.js\"></script>";
         }
         return out;
     }

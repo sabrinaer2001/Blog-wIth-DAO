@@ -34,7 +34,7 @@ public class BlogUserDao
         https://docs.oracle.com/javaee/6/tutorial/doc/bnbrg.html       
          */
         TypedQuery<BlogUser> typedQuery = em.createQuery("SELECT B FROM BlogUser B", BlogUser.class);
-        List<BlogUser> userList = typedQuery.setMaxResults(10).getResultList();
+        List<BlogUser> userList = typedQuery.getResultList();
         return userList;
     }
 
@@ -74,7 +74,7 @@ public class BlogUserDao
     public boolean findUserByName( String name )
     {
         TypedQuery<BlogUser> typedQuery = em.createQuery("SELECT B FROM BlogUser B WHERE B.name LIKE :name", BlogUser.class);
-        List<BlogUser> userList = typedQuery.setParameter("name", name).setMaxResults(10).getResultList();
+        List<BlogUser> userList = typedQuery.setParameter("name", name).getResultList();
         return !userList.isEmpty();
 
     }

@@ -34,7 +34,7 @@ public class PostDao
         https://docs.oracle.com/javaee/6/tutorial/doc/bnbrg.html       
          */
         TypedQuery<Post> typedQuery = em.createQuery("SELECT P FROM Post P", Post.class);
-        List<Post> personaList = typedQuery.setMaxResults(10).getResultList();
+        List<Post> personaList = typedQuery.getResultList();
         return personaList;
     }
 

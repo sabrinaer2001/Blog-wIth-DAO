@@ -11,7 +11,7 @@
                 padding: 20px;
                 background: #f1f1f1;
             }
-
+            
             /* Add a card effect for articles */
             .card {
                 background-color: white;
@@ -23,21 +23,25 @@
             h5{
                 font-size: 13px;
             }
+            h6{
+                margin: 0px;
+                margin-top: 15px;
+            }
             * {
                 box-sizing: border-box;
             }
 
-            ul {
-                list-style-type: none;
-                padding: 0;
-                margin: 0;
+            dt {
+                margin-bottom: 2px;
             }
-
-            ul dt {
-                border: 1px solid #ddd;
-                margin-top: -1px; /* Prevent double borders */
+            dd {
+            }
+            .comment {
+                margin-top: -2px;
                 background-color: #f6f6f6;
-                padding: 12px;
+                padding: 10px;
+                border-style: solid;
+                border-width: 2px;
             }
             .collapsible {
                 background-color: #777;
@@ -53,7 +57,7 @@
             }
 
             .active, .collapsible:hover {
-                background-color: #555;
+                background-color: #525;
             }
 
             .collapsible:after {
@@ -74,6 +78,8 @@
                 overflow: hidden;
                 transition: max-height 0.2s ease-out;
                 background-color: #f1f1f1;
+                border-style: solid;
+                border-width: 1px;
             }
         </style>
     </head>
@@ -88,21 +94,5 @@
         </form>
         <hr>
         <h1>Post: </h1>
-        <script>
-            var coll = document.getElementsByClassName("collapsible");
-            var i;
-
-            for (i = 0; i < coll.length; i++) {
-                coll[i].addEventListener("click", function () {
-                    this.classList.toggle("active");
-                    var content = this.nextElementSibling;
-                    if (content.style.maxHeight) {
-                        content.style.maxHeight = null;
-                    } else {
-                        content.style.maxHeight = content.scrollHeight + "px";
-                    }
-                });
-            }
-        </script>
     </body>
 </html>

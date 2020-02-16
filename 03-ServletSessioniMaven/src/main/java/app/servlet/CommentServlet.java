@@ -57,18 +57,21 @@ public class CommentServlet extends HttpServlet
     {
         try( PrintWriter out = response.getWriter() )
         {
-            String comment = request.getParameter("comment");
-            String postId = request.getParameter("hiddenPostId");
-
-            LocalDateTime myDateObj = LocalDateTime.now();
-            DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
-            String formattedDate = myDateObj.format(myFormatObj);
-
             HttpSession session = request.getSession(false);
-            Comment co = new Comment(formattedDate, comment, (String) session.getAttribute("name"), Long.parseLong(postId));
-            Dao.getCommentDAO().insertComment(co);
-            response.setContentType("text/html");
+            String comment = request.getParameter("comment");
+            if(!"".equals(comment))
+            {
+                String postId = request.getParameter("hiddenPostId");
 
+                LocalDateTime myDateObj = LocalDateTime.now();
+                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+                String formattedDate = myDateObj.format(myFormatObj);
+
+                Comment co = new Comment(formattedDate, comment, (String) session.getAttribute("name"), Long.parseLong(postId));
+                Dao.getCommentDAO().insertComment(co);
+                response.setContentType("text/html");
+
+            }
             if( !"admin".equals(session.getAttribute("name")) )
             {
                 request.getRequestDispatcher("PublicBlog.html").include(request, response);
@@ -80,7 +83,6 @@ public class CommentServlet extends HttpServlet
 
             List<Post> listaPost = Dao.getPostDao().findAll();
             out.print(UsefullF.getPostAndComments(listaPost));
-
         }
     }
 

@@ -34,7 +34,7 @@ public class CommentDao
         https://docs.oracle.com/javaee/6/tutorial/doc/bnbrg.html       
          */
         TypedQuery<Comment> typedQuery = em.createQuery("SELECT C FROM Comment C", Comment.class);
-        List<Comment> commentList = typedQuery.setMaxResults(10).getResultList();
+        List<Comment> commentList = typedQuery.getResultList();
         return commentList;
     }
 
@@ -44,7 +44,7 @@ public class CommentDao
         https://docs.oracle.com/javaee/6/tutorial/doc/bnbrg.html       
          */
         TypedQuery<Comment> typedQuery = em.createQuery("SELECT C FROM Comment C WHERE C.idPost = :postId", Comment.class);
-        List<Comment> commentList = typedQuery.setParameter("postId", postId).setMaxResults(10).getResultList();
+        List<Comment> commentList = typedQuery.setParameter("postId", postId).getResultList();
         return commentList;
     }
 
