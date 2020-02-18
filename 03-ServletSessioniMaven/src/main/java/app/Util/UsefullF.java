@@ -44,13 +44,13 @@ public class UsefullF
                 out +=    "<dd>" + c.getTesto() + "</dd>"
                         + "<h6>" + c.getDataOra() + "</h6>"
                         + "</div>";
-                //out += "<p>" + "<span style=\"text-align: right;\">" + c.getDataOra() + "</span>" + " " + c.getAutore() + ":\n" + c.getTesto() + "</p>";
             }
             out +=    "</dl>"
                     + "</div>"
-                    + "</div>"
-                    + "<script src=\"ViewComments.js\"></script>";
+                    + "</div>";
         }
+        out += "<script src=\"ViewComments.js\"></script>";
+        System.out.println(out);
         return out;
     }
 }

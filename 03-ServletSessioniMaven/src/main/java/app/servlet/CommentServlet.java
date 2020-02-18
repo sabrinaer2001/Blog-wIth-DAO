@@ -55,6 +55,7 @@ public class CommentServlet extends HttpServlet
     protected void doPost( HttpServletRequest request, HttpServletResponse response )
             throws ServletException, IOException
     {
+        response.setContentType("text/html");
         try( PrintWriter out = response.getWriter() )
         {
             HttpSession session = request.getSession(false);
@@ -69,7 +70,6 @@ public class CommentServlet extends HttpServlet
 
                 Comment co = new Comment(formattedDate, comment, (String) session.getAttribute("name"), Long.parseLong(postId));
                 Dao.getCommentDAO().insertComment(co);
-                response.setContentType("text/html");
 
             }
             if( !"admin".equals(session.getAttribute("name")) )
